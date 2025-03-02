@@ -7,6 +7,7 @@ const ProductsPage: React.FC = () => {
   const { products, getProducts, isLoading } = useProductStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [priceRange, setPriceRange] = useState<number>(100);
   
   useEffect(() => {
     getProducts();
@@ -23,9 +24,13 @@ const ProductsPage: React.FC = () => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           product.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
+    const matchesPrice = product.price <= priceRange;
     
-    return matchesSearch && matchesCategory;
+    return matchesSearch && matchesCategory && matchesPrice;
   });
+
+  // Find maximum price for dynamic range
+  const maxPrice = Math.max(...products.map(p => p.price), 100);
   
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -85,12 +90,17 @@ const ProductsPage: React.FC = () => {
                 <input
                   type="range"
                   min="0"
-                  max="100"
+                  max={maxPrice}
+                  value={priceRange}
+                  onChange={(e) => setPriceRange(Number(e.target.value))}
                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>$0</span>
-                  <span>$100</span>
+                  <span>${maxPrice}</span>
+                </div>
+                <div className="text-center text-sm mt-2">
+                  Selected: ${priceRange}
                 </div>
               </div>
             </div>

@@ -34,6 +34,10 @@ export interface SubscriptionPlan {
 
 export interface Feedback {
   id: string;
+  name: string;
+  price: number;
+  features: string[];
+  isPopular?: boolean;
   user_id: string;
   rating: number;
   comment: string;
