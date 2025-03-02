@@ -1,0 +1,10 @@
+#Future Features
+
+##1) Offsprings Prediction Feature 
+We can add a feature like if we upload two photos of two different dogs with the help of AI models we can predict the breed of the offspring.
+
+##2) Dogs Medication Feature 
+We can add a feature like medications for dogs like vet numbers, vet near me, home remedies,etc.
+
+##3) Life Expectancy Feature 
+We can add a feature where we can upload the photo of a dog and an AI model predicts the life expectancy or what is the current age of that dog
