@@ -65,7 +65,7 @@ const HomePage: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl transform-gpu cursor-pointer">
               <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Search className="h-6 w-6 text-indigo-600" />
               </div>
@@ -75,7 +75,7 @@ const HomePage: React.FC = () => {
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl transform-gpu cursor-pointer">
               <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Dog className="h-6 w-6 text-indigo-600" />
               </div>
@@ -85,7 +85,7 @@ const HomePage: React.FC = () => {
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl transform-gpu cursor-pointer">
               <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Award className="h-6 w-6 text-indigo-600" />
               </div>
@@ -170,7 +170,7 @@ const HomePage: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl transform-gpu cursor-pointer">
               <img 
                 src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
                 alt="Dog Food" 
@@ -192,7 +192,7 @@ const HomePage: React.FC = () => {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl transform-gpu cursor-pointer">
               <img 
                 src="https://images.unsplash.com/photo-1604578762246-41134e37f9cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
                 alt="Dog Bed" 
@@ -214,7 +214,7 @@ const HomePage: React.FC = () => {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl transform-gpu cursor-pointer">
               <img 
                 src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
                 alt="Dog Toy" 

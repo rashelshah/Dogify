@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Loader2, Dog } from 'lucide-react';
+import { Plus, Loader2, Dog, User } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import { useDogStore } from '../store/dogStore';
 import ImageUploader from '../components/ImageUploader';
@@ -9,9 +9,11 @@ import FeedbackForm from '../components/FeedbackForm';
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useAuthStore();
+  const { user, signOut } = useAuthStore();
   const { images, getUserImages, isLoading } = useDogStore();
   const [showUploader, setShowUploader] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!user) {
@@ -21,6 +23,24 @@ const DashboardPage: React.FC = () => {
 
     getUserImages(user.id);
   }, [user, getUserImages, navigate]);
+
+  // Handle clicks outside the profile dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
+        setShowProfileDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleProfileClick = () => {
+    setShowProfileDropdown((prev) => !prev); // Toggle dropdown visibility
+  };
 
   if (!user) {
     return null;
@@ -52,6 +72,48 @@ const DashboardPage: React.FC = () => {
                 </>
               )}
             </button>
+            <div className="relative ml-3" ref={profileDropdownRef}>
+              <button
+                onClick={handleProfileClick}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <User className="h-5 w-5" />
+              </button>
+              {showProfileDropdown && (
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        navigate('/dashboard');
+                        setShowProfileDropdown(false); // Close dropdown after navigation
+                      }}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Dashboard
+                    </button>
+                    <button
+                      onClick={() => {
+                        navigate('/profile');
+                        setShowProfileDropdown(false); // Close dropdown after navigation
+                      }}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Profile
+                    </button>
+                    <button
+                      onClick={() => {
+                        signOut();
+                        navigate('/login');
+                        setShowProfileDropdown(false); // Close dropdown after sign out
+                      }}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
